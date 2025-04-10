@@ -12,9 +12,6 @@ class ModulesService {
       );
 
       if (response.statusCode == 200) {
-        print('Chapters fetched: ${response.data}');
-
-        // Decode the JSON string if necessary
         List<Modules> chapters = (json.decode(response.data) as List)
             .map((e) => Modules.fromJson(e))
             .toList();

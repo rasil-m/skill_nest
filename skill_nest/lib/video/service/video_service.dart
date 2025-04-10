@@ -13,8 +13,6 @@ class VideoService {
       );
 
       if (response.statusCode == 200) {
-        print('Videos fetched: ${response.data}');
-
         List<Video> videos = (json.decode(response.data) as List)
             .map((e) => Video.fromJson(e))
             .toList();

@@ -19,14 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> navigateAfterDelay() async {
-    await Future.delayed(const Duration(seconds: 3)); // 3 sec splash
+    await Future.delayed(const Duration(seconds: 3));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isFirst = prefs.getBool("isFirst") ?? true;
 
     if (isFirst) {
-      await prefs.setBool(
-          "isFirst", false); // set to false so next time it goes to home
+      await prefs.setBool("isFirst", false);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const IntroductionScreen()),

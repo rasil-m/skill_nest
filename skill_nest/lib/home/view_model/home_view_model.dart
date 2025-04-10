@@ -11,7 +11,6 @@ import 'package:skill_nest/video/service/video_service.dart';
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel() {
     fetchSubjects();
-    loadFavoriteIds();
   }
   List<Subject> _subjects = [];
   List<Modules> _modules = [];
@@ -82,42 +81,6 @@ class HomeViewModel extends ChangeNotifier {
 
   setVideoLoader(bool value) {
     _videoLoader = value;
-    notifyListeners();
-  }
-
-  Future<void> loadFavoriteIds() async {
-    final prefs = await SharedPreferences.getInstance();
-    _favoriteVideoIds = prefs.getStringList('favoriteVideoIds') ?? [];
-    _favoriteSubjectIds = prefs.getStringList('favoriteSubjectIds') ?? [];
-    notifyListeners();
-  }
-
-  Future<void> toggleFavoriteVideo(Video video) async {
-    final prefs = await SharedPreferences.getInstance();
-    final idStr = video.id.toString();
-
-    if (_favoriteVideoIds.contains(idStr)) {
-      _favoriteVideoIds.remove(idStr);
-    } else {
-      _favoriteVideoIds.add(idStr);
-    }
-
-    await prefs.setStringList('favoriteVideoIds', _favoriteVideoIds);
-    notifyListeners();
-    print("added");
-  }
-
-  Future<void> toggleFavoriteSubject(Subject subject) async {
-    final prefs = await SharedPreferences.getInstance();
-    final idStr = subject.id.toString();
-
-    if (_favoriteSubjectIds.contains(idStr)) {
-      _favoriteSubjectIds.remove(idStr);
-    } else {
-      _favoriteSubjectIds.add(idStr);
-    }
-
-    await prefs.setStringList('favoriteSubjectIds', _favoriteSubjectIds);
     notifyListeners();
   }
 

@@ -12,7 +12,6 @@ class HomeService {
         "https://trogon.info/interview/php/api/subjects.php",
       );
       if (response.statusCode == 200) {
-        print('Fetch successful: ${response.data}');
         List<Subject> subjects = (json.decode(response.data) as List)
             .map((e) => Subject.fromJson(e))
             .toList();
